@@ -2,332 +2,275 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>ROAM | Mobile Exploration App | Samanta Jimenez Sandate</title>
-  
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Quicksand:wght@600&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="portfolio_style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROAM — Samanta Jimenez Sandate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="project-style.css">
 </head>
-
 <body>
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
 
-  <!-- ========================= NAVBAR ========================= -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-success-subtle">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.html">Samanta Jimenez Sandate</a>
-    </div>
+  <nav id="main-nav">
+    <a href="index.html" class="nav-name">Samanta Jimenez Sandate</a>
+    <a href="index.html#projects" class="nav-back">← All Projects</a>
   </nav>
 
-  <div class="container mt-4">
-      <a href="index.html" class="btn btn-outline-success">
-        ← Back to Home
-      </a>
-
-  <!-- ========================= MAIN CONTENT ========================= -->
-  <main class="container my-5">
-
-    <!-- ========================= HEADER ========================= -->
-    <header class="text-center mb-5">
-  <h1>ROAM: Gamifying Local Exploration</h1>
-  <p class="lead">
-    A mobile app that reduces decision fatigue by guiding users through 
-    curated, gamified local experiences.
-  </p>
-</header>
-
-    <!-- ========================= HERO IMAGE ========================= -->
-    <img src="https://i.ibb.co/zhddb56h/Screenshot-2026-01-05-152606.png" 
-     alt="ROAM App Overview" 
-     class="project-page-img">
-
-    <!-- ========================= OVERVIEW  ========================= -->
-  <section class="mb-5">
-    <h2>Overview</h2>
-    <div class="row">
-      <div class="col-md-3"><strong>Project Type:</strong><br>UX Research + Interaction Design</div>
-      <div class="col-md-3"><strong>Team:</strong><br>7 Designers</div>
-      <div class="col-md-3"><strong>Timeline:</strong><br>8 weeks</div>
-      <div class="col-md-3"><strong>Focus:</strong><br>Exploration + Social Play</div>
+  <!-- HERO -->
+  <div class="project-hero">
+    <p class="project-hero-tag reveal">Interaction Design · Mobile · Gamification</p>
+    <h1 class="reveal">Encouraging Local Exploration One ROAM At a Time</h1>
+    <p class="project-hero-desc reveal">A scavenger-hunt–style mobile app that fights decision fatigue and helps people break routine, discover local gems, and support their communities — through guided, gamified adventures.</p>
+    <div class="project-meta reveal">
+      <div class="project-meta-item"><span>Role</span><strong>UX Designer</strong></div>
+      <div class="project-meta-item"><span>Team</span><strong>7 Designers</strong></div>
+      <div class="project-meta-item"><span>Timeline</span><strong>8 Weeks</strong></div>
+      <div class="project-meta-item"><span>Focus</span><strong>Mobile · Social</strong></div>
     </div>
-  </section>
+  </div>
 
+  <div style="display:flex; justify-content:center; padding:2rem 3rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <img src="https://i.ibb.co/zhddb56h/Screenshot-2026-01-05-152606.png"
+         alt="ROAM App Overview" style="width:100%; max-width:680px; display:block; border:1px solid var(--border);">
+  </div>
 
-  <!-- ========================= PROBLEM ========================= -->
-  <section class="mb-5">
-    <h2>The Problem</h2>
-    <p>
-      Young adults want to explore their cities but face decision paralysis due to:
+  <div class="jump-nav">
+    <span class="jump-nav-label">Jump to</span>
+    <a href="#roam-research">Research</a>
+    <a href="#roam-ia">Architecture</a>
+    <a href="#roam-wireframes">Wireframes</a>
+    <a href="#roam-branding">Branding</a>
+    <a href="#roam-final">Final Design</a>
+    <a href="#roam-reflection">Reflection</a>
+  </div>
+
+  <div class="project-body">
+
+    <!-- OVERVIEW -->
+    <div class="project-section reveal">
+      <div class="section-label">Overview</div>
+      <h2>Turning "I don't know what to do" into an adventure</h2>
+      <p>ROAM is a mobile app that transforms local exploration into guided, gamified experiences. Instead of scrolling endlessly through Yelp or TikTok, users join curated scavenger hunts, discover hidden local gems, earn rewards, and share their adventures with friends.</p>
+    </div>
+
+    <!-- PROBLEM -->
+    <div class="project-section reveal">
+      <div class="section-label">The Problem</div>
+      <h2>Young adults are stuck in a loop</h2>
+      <p>Young adults want to explore their cities but face real decision paralysis. The result? They default to the same routines rather than discovering what's around them.</p>
+
+      <div class="insights-grid">
+        <div class="insight-cell">
+          <span class="insight-num">01</span>
+          <p>Too many options with no clear guidance on where to start</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-num">02</span>
+          <p>No personalised recommendations that feel trustworthy</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-num">03</span>
+          <p>Difficulty discovering local gems beyond mainstream spots</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-num">04</span>
+          <p>Limited tools that support social, shared exploration</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESEARCH -->
+    <div id="roam-research"></div>
+    <div class="project-section reveal">
+      <div class="section-label">Research</div>
+      <h2>33 survey responses, clear patterns</h2>
+      <p>About 60% of respondents use Google Maps, Yelp, TikTok, or Instagram to discover activities — but none of these provide guided, interactive outings. Discovery is fragmented, choices are overwhelming, and the social dimension is missing.</p>
+
+      <div class="callout">
+        Users jump between multiple platforms to plan a single outing, creating friction and drop-off before they ever leave the house.
+      </div>
+
+      <img src="https://i.ibb.co/7t5vQ5Y3/project-3-research.png" alt="Survey Findings" class="project-img">
+      <p class="project-img-caption">Survey findings — discovery behaviour and pain points across 33 respondents</p>
+
+      <h3>The three big insights</h3>
       <ul>
-        <li>Overwhelming options</li>
-        <li>Lack of personalized recommendations</li>
-        <li>Difficulty discovering local gems</li>
-        <li>Limited social exploration tools</li>
+        <li><strong>Discovery is fragmented:</strong> Users jump between platforms to plan one outing, causing drop-off</li>
+        <li><strong>Too many choices:</strong> Overwhelm leads to repetitive behaviour and missed opportunities</li>
+        <li><strong>Social experiences drive action:</strong> Users are significantly more likely to try new things with others</li>
       </ul>
-      As a result, users default to repetitive routines instead of discovering new local experiences.
-    </p>
-  </section>
+    </div>
 
-  <!-- ========================= SOLUTION ========================= -->
-  <section class="mb-5">
-    <h2>Our Solution</h2>
-    <p>
-      We designed ROAM, a mobile app that transforms local exploration into guided, gamified experiences.
-      Instead of searching endlessly, users can:
-      <ul>
-        <li>Join personalized scavenger hunts</li>
-        <li>Discover hidden gems through interactive maps</li>
-        <li>Earn rewards for trying new activities</li>
-        <li>Share adventures with friends</li>
-      </ul>
-    </p>
-  </section>
+    <!-- PERSONA -->
+    <div class="project-section reveal">
+      <div class="section-label">Personas</div>
+      <h2>Designing for Mary — and people like her</h2>
+      <p>Our primary persona was Mary Park, a 20-year-old student who loves cafe hopping and social outings. She discovers spots through TikTok, feels bored with repeat places, and wants personalised local discovery without the endless scroll.</p>
 
-  <!-- ========================= MY ROLE ========================= -->
-  <section class="mb-5">
-    <h2>My Role</h2>
-    <p>
-      As a UX Designer on the ROAM team, I focused on interaction design and validation, specifically:
-      <ul>
-        <li>Led usability testing and synthesis</li>
-        <li>Identified key friction points in early flows</li>
-        <li>Drove iteration on navigation and roam creation experience</li>
-        <li>Contributed to wireframes and high-fidelity prototypes in Figma</li>
-      </ul>
-    </p>
-  </section>
+      <img src="https://i.ibb.co/bRKv9f7n/project3-persona1.png" alt="Persona" class="project-img">
+      <p class="project-img-caption">Primary persona — Mary Park, Student Explorer</p>
+    </div>
 
-  <!-- ========================= TARGET AUDIENCE ========================= -->
-  <section class="mb-5">
-    <h2>Target Audience</h2>
-    <ul>
-      <li>Young adults seeking new experiences</li>
-      <li>People new to an area</li>
-      <li>Social explorers & food/cafe enthusiasts</li>
-      <li>Families planning weekend activities</li>
-    </ul>
-  </section>
+    <!-- COMPETITIVE ANALYSIS -->
+    <div class="project-section reveal">
+      <div class="section-label">Competitive Analysis</div>
+      <h2>The gap no one is filling</h2>
+      <p>We evaluated Yelp, Google Maps, TikTok, Beli, Let's Roam, and others. A clear pattern emerged: strong search and reviews, weak gamification, limited social exploration, and no guided real-world adventure flow.</p>
 
+      <img src="https://i.ibb.co/YBCncvGv/project-3-comp-analysis.png" alt="Competitive Analysis" class="project-img">
+      <p class="project-img-caption">Competitive analysis — ROAM fills the gamified, social exploration gap</p>
+    </div>
 
-  <!-- ========================= RESEARCH ========================= -->
-  <section class="mb-5">
-    <h2>User Research & Surveys</h2>
+    <!-- MY ROLE -->
+    <div class="project-section reveal">
+      <div class="section-label">My Role</div>
+      <h2>Interaction design, validation — and advocacy</h2>
+      <div class="role-list">
+        <span class="role-pill">Usability Testing</span>
+        <span class="role-pill">Research Synthesis</span>
+        <span class="role-pill">Friction Mapping</span>
+        <span class="role-pill">Navigation Design</span>
+        <span class="role-pill">Wireframing</span>
+        <span class="role-pill">Hi-Fi Prototyping</span>
+      </div>
+      <p>I led usability testing and synthesis, identified friction points in early flows, and drove iteration on navigation and the roam creation experience. But beyond execution, I was also an advocate for features the team was hesitant to pursue.</p>
+      <p>Two features I pushed for specifically: the points and rewards system, and GPS map functionality. Both were initially flagged as too complex to implement. My argument was simple — apps like McDonald's and Yelp have proven that users engage deeply with location-based rewards when the UX is clear. The complexity isn't a reason not to build it; it's a reason to design it carefully. Both features made it into the final prototype.</p>
+    </div>
 
-    <p><strong>Survey Size:</strong> 33 respondents</p>
+    <!-- IA -->
+    <div id="roam-ia"></div>
+    <div class="project-section reveal">
+      <div class="section-label">Information Architecture</div>
+      <h2>Building the right structure first</h2>
+      <p>Before designing screens, we mapped the full app architecture to ensure every feature had a clear home and the navigation felt intuitive.</p>
 
-    <p>
-      About 60% of respondents use Google Maps, Yelp, TikTok, or Instagram
-      to discover activities — but none provide guided, interactive outings.
-    </p>
+      <img src="https://i.ibb.co/WWvj7VRD/project3-information-architecture.png" alt="Information Architecture" class="project-img">
+      <p class="project-img-caption">Full information architecture — 8 core sections with clear user pathways</p>
+    </div>
 
-    <ul>
-      <p> Key Insight 1: Discovery is fragmented </p>
-        <li>Users jump between multiple platforms to plan one outing, creating friction and drop-off.</li>
-      <p> Key Insight 2: Too many choices </p>
-        <li>Users feel overwhelmed and avoid making decisions, leading to repetitive behavior</li>
-      <p> Key Insight 3: Desire for social, shareable experiences </p>
-        <li>Users are more likely to try new things with others. </li>
-    </ul>
+    <!-- WIREFRAMES -->
+    <div id="roam-wireframes"></div>
+    <div class="project-section reveal">
+      <div class="section-label">Wireframes</div>
+      <h2>From rough to refined</h2>
+      <p>Low- and mid-fidelity wireframes let us explore scavenger hunt flows, map progress tracking, and social invitation patterns before committing to visual design. This is where we caught our most expensive mistakes early.</p>
 
-<!-- Make this image bigger  -->
-    <img src="https://i.ibb.co/7t5vQ5Y3/project-3-research.png" 
-         alt="Survey Findings"
-         class="project-page-img">
-  </section>
+      <img src="https://i.ibb.co/BYT2vNK/project3-wireframes.png" alt="Wireframes" class="project-img">
+      <p class="project-img-caption">Low-fidelity wireframes — exploring core flows before visual design</p>
 
+      <p>Three issues surfaced immediately. Feature discoverability was low — users were missing key actions entirely because nothing drew their eye to them. The roam creation flow was confusing; people didn't understand what they were building or why. And the navigation had dead ends that forced users to restart flows they'd already started. Each of these pointed to the same root cause: we had designed around our own mental model of the app rather than how a new user would actually encounter it.</p>
+    </div>
 
-  <!-- ========================= PERSONAS ========================= -->
-  <section class="mb-5">
-    <h2>Personas</h2>
+    <!-- USABILITY TESTING -->
+    <div class="project-section reveal">
+      <div class="section-label">Usability Testing</div>
+      <h2>Testing validated the core concept</h2>
 
-    <p><strong>Mary Park — Student Explorer (Age 20)</strong></p>
-    <ul>
-      <li>Cafe hopping & social outings</li>
-      <li>Finds spots through TikTok</li>
-      <li>Feels bored with repeat places</li>
-      <li>Wants personalized local discovery</li>
-    </ul>
+      <img src="https://i.ibb.co/Y4psRTnN/project3-usability-results.png" alt="Usability Testing Results" class="project-img">
+      <p class="project-img-caption">Usability testing results — task success rates and key findings</p>
 
-    <img src="https://i.ibb.co/bRKv9f7n/project3-persona1.png"
-         alt="Persona"
-         class="project-page-img">
-  </section>
+      <div class="insights-grid">
+        <div class="insight-cell">
+          <span class="insight-num">50%+</span>
+          <p>Users expressed strong interest in guided exploration tools</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-num">↑</span>
+          <p>Improved task success and navigation clarity after each iteration</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-num">✓</span>
+          <p>Validated demand for social, structured local discovery</p>
+        </div>
+        <div class="insight-cell">
+          <span class="insight-num">3x</span>
+          <p>Clear CTAs tripled Roam start rate in revised flows</p>
+        </div>
+      </div>
+    </div>
 
+    <!-- BRANDING -->
+    <div id="roam-branding"></div>
+    <div class="project-section reveal">
+      <div class="section-label">Branding &amp; Design System</div>
+      <h2>An identity that feels like an adventure — and a lesson in color</h2>
+      <p>The design system was built around warmth, exploration, and play — using a mascot and badge system to reinforce the gamified experience throughout. But getting here wasn't straightforward.</p>
+      <p>Our first usability tests revealed a problem we hadn't anticipated: users were struggling to navigate quickly because the button colors weren't communicating hierarchy clearly. Actions that should have felt obvious were getting missed. The warm palette we'd chosen felt right aesthetically, but we hadn't been rigorous enough about contrast and visual weight between primary, secondary, and inactive states. We went back and rebuilt the color system with usability as the primary constraint rather than aesthetics, and task completion times improved noticeably in the next round of testing.</p>
 
-  <!-- ========================= COMPETITIVE ANALYSIS ========================= -->
-  <section class="mb-5">
-    <h2>Competitive Analysis</h2>
+      <img src="https://i.ibb.co/spBkbQWL/project3-branding.png" alt="ROAM Branding" class="project-img">
+      <p class="project-img-caption">ROAM brand system — warm palette, IBM Plex Sans, mascot and badge system</p>
+    </div>
 
-    <p>We evaluated Yelp, Google Maps, TikTok, Beli, Let’s Roam, and others.</p>
+    <!-- FINAL -->
+    <div id="roam-final"></div>
+    <div class="project-section reveal">
+      <div class="section-label">Final Prototype</div>
+      <h2>The finished experience</h2>
+      <p>The final prototype brings together guided scavenger hunts, personalised recommendations, interactive map progress tracking, a social feed, and a full points and rewards system.</p>
 
-    <ul>
-      <li>Strong at search & reviews</li>
-      <li>Weak in gamification</li>
-      <li>Limited social exploration</li>
-      <li>No guided real-world adventure flow</li>
-    </ul>
+      <img src="https://i.ibb.co/mFb3NGyv/Final-Prototype-project-3.png" alt="Final Prototype" class="project-img">
+      <p class="project-img-caption">Final prototype screens — complete ROAM experience</p>
+    </div>
 
-    <p>
-      ROAM fills this gap with guided, gamified, social exploration.
-    </p>
+    <!-- FUTURE WORK -->
+    <div class="project-section reveal">
+      <div class="section-label">Hard Decisions &amp; What's Next</div>
+      <h2>The features we wrestled with</h2>
+      <p>One of the most debated features was a group roam mode — the ability for friends to complete a hunt together in real time. The idea was compelling and our research clearly showed that social motivation drives exploration. But we couldn't responsibly design it without addressing real safety concerns: how do you let strangers join a roam without creating risk? How do you handle location sharing between users who don't know each other well? We didn't have good answers, so we didn't ship it. It's the right call, but it's one I'd want to revisit with proper safety research behind it.</p>
+      <p>The features we'd prioritise in a next version: tiered rewards and streak bonuses, co-op team hunts with proper privacy controls, multi-day roam planning, and weekly community challenges.</p>
+    </div>
 
-    <img src="https://i.ibb.co/YBCncvGv/project-3-comp-analysis.png"
-         class="project-page-img">
-  </section>
+    <!-- REFLECTION -->
+    <div id="roam-reflection"></div>
+    <div class="project-section reveal">
+      <div class="section-label">Reflection</div>
+      <h2>What I'd do differently</h2>
+      <p>The thing I'd go back and change most is how late we figured out the point system. We knew from the start that rewards were core to the concept — that's what makes ROAM gamified rather than just another discovery app. But we kept deferring the hard questions: what do points actually get you? How do you earn them in a way that feels fair? How do you display them without cluttering the UI? By the time we tackled it seriously, we were already deep into visual design, which meant the points system felt bolted on rather than woven in.</p>
+      <p>If I started again, the reward architecture would be one of the first things I'd define — not the last. That constraint would have shaped better decisions earlier in the process.</p>
 
-
-  <!-- ========================= INFORMATION ARCHITECTURE ========================= -->
-  <section class="mb-5">
-    <h2>Information Architecture</h2>
-
-    <ul>
-      <li>Home Dashboard</li>
-      <li>Create / Join Roam</li>
-      <li>Interactive Map</li>
-      <li>Feed (social posts)</li>
-      <li>Rewards & Points</li>
-      <li>Leaderboard</li>
-      <li>Profile & Settings</li>
-      <li>Invites & Notifications</li>
-    </ul>
-
-    <img src="https://i.ibb.co/WWvj7VRD/project3-information-architecture.png"
-         class="project-page-img">
-  </section>
-
-
-  <!-- ========================= WIREFRAMES ========================= -->
-  <section class="mb-5">
-    <h2>Wireframes → Iterations</h2>
-
-    <p>
-      Low- and mid-fidelity wireframes explored scavenger hunt flows,
-      map progress tracking, and social invitations.
-    </p>
-
-    <p>Key early issues discovered:</p>
-
-    <ul>
-      <li>Low feature discoverability</li>
-      <li>Roam creation confusion</li>
-      <li>Unclear navigation</li>
-    </ul>
-
-    <img src="https://i.ibb.co/BYT2vNK/project3-wireframes.png"
-         class="project-page-img">
-  </section>
-
-
-  <!-- ========================= USABILITY TESTING ========================= -->
-  <section class="mb-5">
-    <h2>Usability Testing Findings</h2>
-
-    <ol>
-      <li>50%+ of users expressed strong interest in guided exploration tools</li>
-      <li>Improved task success and navigation clarity after iteration</li>
-      <li>Validated demand for social, structured local discovery experiences</li>
-    </ol>
-
-    <img src="https://i.ibb.co/Y4psRTnN/project3-usability-results.png"
-         class="project-page-img">
-  </section>
-
-  <!-- ========================= OUTCOMES ========================= -->
-  <section class="mb-5">
-    <h2>Changes Implemented</h2>
-    <ul>
-      <li>Introduced clear primary CTAs for starting Roams</li>
-      <li>Added onboarding tips to highlight key features</li>
-      <li>Enhanced feedback for user actions (e.g., confirmations, progress)</li>
-    </ul>
-  </section>
-
-
-  <!-- ========================= DESIGN SYSTEM ========================= -->
-  <section class="mb-5">
-    <h2>Branding & Design System</h2>
-
-    <ul>
-      <li>Warm exploration-focused palette</li>
-      <li>IBM Plex Sans typography system</li>
-      <li>Mascot + badge system</li>
-      <li>Gamified reward visuals</li>
-    </ul>
-
-    <img src="https://i.ibb.co/spBkbQWL/project3-branding.png"
-         class="project-page-img">
-  </section>
-
-
-  <!-- ========================= FINAL SOLUTION ========================= -->
-  <section class="mb-5">
-    <h2>Final Prototype</h2>
-
-    <ul>
-      <li>Scavenger-hunt style roams</li>
-      <li>Personalized recommendations</li>
-      <li>Interactive map + progress tracking</li>
-      <li>Points & rewards system</li>
-      <li>Social feed & co-op hunts</li>
-      <li>Leaderboards & badges</li>
-    </ul>
-
-    <img src="https://i.ibb.co/mFb3NGyv/Final-Prototype-project-3.png"
-         class="project-page-img">
-  </section>
-
-
-  <!-- ========================= FUTURE WORK ========================= -->
-  <section class="mb-5">
-    <h2>Future Enhancements</h2>
-
-    <ul>
-      <li>Tiered rewards & streak bonuses</li>
-      <li>Co-op team hunts</li>
-      <li>Multi-day roam planning</li>
-      <li>Lodging & travel integrations</li>
-      <li>Weekly/monthly challenges</li>
-    </ul>
-  </section>
-
-
-  <!-- ========================= REFLECTION ========================= -->
-  <section class="mb-5">
-    <h2>Reflection</h2>
-    <p>
-      This project shifted my approach from designing features to designing systems of behavior.
-      I learned how:
-      <ul>
-        <li>Reducing choice can improve engagement</li>
-        <li>Structure can be more valuable than flexibility</li>
-        <li>Social motivation is a powerful driver of user action</li>
-      </ul>
-      Most importantly, I learned how to translate ambiguous user needs into clear product decisions backed by research and iteration.
-    </p>
-  </section>
-
-  <div class="project-nav">
-  <div class="project-nav-row">
-
-    <a href="project2.html" class="next-project-btn">
-      ← View Previous Project
-    </a>
-
-    <a href="index.html#projects" class="next-project-btn">
-      Back to Home
-    </a>
+      <div class="callout">
+        The point system should have been a design constraint from day one, not a feature we figured out at the end. That's the kind of lesson you only learn by getting it wrong.
+      </div>
+    </div>
 
   </div>
-</div>
 
+  <!-- PROJECT NAV -->
+  <div class="project-nav-bar">
+    <a href="index.html#projects" class="project-nav-link back-home">&#8592; All Projects</a>
+    <a href="project1.html" class="project-nav-link" style="text-align:right; align-items:flex-end;">
+      <span>Next Project</span>
+      <strong>CRSci Redesign &#8594;</strong>
+    </a>
+  </div>
 
-</main>
+  <footer>
+    <span class="footer-name">Samanta Jimenez Sandate</span>
+    <span class="footer-note">Designed & built with care · 2025</span>
+  </footer>
 
+  <script>
+    const cur = document.getElementById('cur');
+    const ring = document.getElementById('cur-ring');
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    document.addEventListener('mouseover', e => {
+      document.body.classList.toggle('hovering', !!e.target.closest('a, button'));
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+    window.addEventListener('scroll', () => {
+      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
 </body>
 </html>

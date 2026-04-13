@@ -2,249 +2,531 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>My Portfolio | Samanta Jimenez Sandate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Quicksand:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="portfolio_style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samanta Jimenez Sandate — UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg: #F7F5F0;
+      --ink: #1C1C1A;
+      --mid: #6B6860;
+      --light: #B0ADA6;
+      --accent: #3D6B4F;
+      --accent-soft: #EAF0EC;
+      --border: rgba(28,28,26,0.12);
+      --serif: 'Libre Baskerville', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+
+    /* CURSOR */
+    * { cursor: none !important; }
+    #cur, #cur-ring { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    #cur { width: 8px; height: 8px; background: var(--ink); transition: width .2s, height .2s, background .2s; }
+    #cur-ring { width: 32px; height: 32px; border: 1px solid var(--ink); opacity: .3; transition: width .3s, height .3s, opacity .3s, border-color .3s; }
+    .hovering #cur { width: 5px; height: 5px; background: var(--accent); }
+    .hovering #cur-ring { width: 48px; height: 48px; opacity: .15; border-color: var(--accent); }
+    .dark-bg #cur { background: var(--bg); }
+    .dark-bg #cur-ring { border-color: var(--bg); opacity: .4; }
+    .dark-bg.hovering #cur { background: #9fcfb3; }
+    .dark-bg.hovering #cur-ring { border-color: #9fcfb3; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; background: rgba(247,245,240,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    nav.scrolled { border-color: var(--border); }
+    .nav-name { font-family: var(--serif); font-size: .95rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: .01em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--mid); transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links .resume-btn { padding: .45rem 1rem; border: 1px solid var(--ink); color: var(--ink); font-size: .7rem; transition: background .2s, color .2s; }
+    .nav-links .resume-btn:hover { background: var(--ink); color: var(--bg); }
+
+    /* HERO */
+    #home { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 8rem 3rem 5rem; max-width: 1200px; margin: 0 auto; gap: 4rem; }
+    .hero-tag { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp .7s .2s forwards; }
+    .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+    h1.hero-title { font-family: var(--serif); font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.08; letter-spacing: -.02em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp .8s .4s forwards; }
+    h1.hero-title em { font-style: italic; color: var(--accent); }
+    .hero-bio { font-size: 1rem; color: var(--mid); line-height: 1.8; max-width: 420px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp .7s .6s forwards; }
+    .hero-actions { display: flex; gap: 1.25rem; align-items: center; opacity: 0; animation: fadeUp .7s .8s forwards; }
+    .btn-dark { display: inline-block; padding: .75rem 1.75rem; background: var(--ink); color: var(--bg); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: background .2s, transform .2s; }
+    .btn-dark:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-ghost { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); text-decoration: none; display: flex; align-items: center; gap: .4rem; transition: color .2s; }
+    .btn-ghost:hover { color: var(--ink); }
+
+    /* HERO CIRCULAR AVATAR */
+    .hero-image-col { display: flex; justify-content: center; align-items: center; opacity: 0; animation: fadeIn 1s .5s forwards; }
+    .hero-avatar-wrap {
+      position: relative;
+      width: 360px; height: 360px;
+    }
+    .hero-avatar-wrap::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: -8px;
+      width: calc(100% + 16px); height: calc(100% + 16px);
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      z-index: 0;
+    }
+    .hero-avatar-wrap::after {
+      content: '';
+      position: absolute;
+      top: -18px; left: -18px;
+      width: calc(100% + 36px); height: calc(100% + 36px);
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .hero-avatar-wrap img {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: transparent;
+    }
+
+    /* MARQUEE */
+    .marquee-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; padding: .85rem 0; }
+    .marquee-track { display: flex; gap: 3rem; width: max-content; animation: marquee 22s linear infinite; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--light); align-items: center; }
+    .marquee-track .dot { color: var(--accent); font-size: 1rem; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SECTIONS */
+    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+    .section-num { display: none; }
+    .section-title { font-family: var(--serif); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: -.01em; }
+
+    /* ABOUT */
+    #about { background: white; }
+    .about-grid { display: grid; grid-template-columns: 0.6fr 1fr; gap: 4rem; align-items: start; }
+    .about-portrait img { width: 100%; max-width: 280px; aspect-ratio: 3/4; object-fit: cover; object-position: center top; }
+    .about-content h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; font-style: italic; color: var(--accent); margin-bottom: 1.25rem; }
+    .about-content p { color: var(--mid); margin-bottom: 1rem; line-height: 1.8; }
+    .about-details { margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .about-detail-item span { display: block; font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--light); margin-bottom: .25rem; }
+    .about-detail-item strong { font-size: .9rem; font-weight: 500; }
+
+    /* HOW I WORK */
+    #skills { background: var(--bg); }
+    .hiw-philosophy { border: 1px solid var(--border); padding: 2.5rem; margin-bottom: 1px; background: white; position: relative; overflow: hidden; }
+    .hiw-philosophy::before { content: '\201C'; font-family: var(--serif); font-size: 5rem; line-height: 1.2; color: var(--accent); opacity: 0.25; position: absolute; top: .5rem; left: 1rem; pointer-events: none; z-index: 0; }
+    .hiw-quote { font-family: var(--serif); font-size: 1.3rem; font-style: italic; line-height: 1.6; color: var(--ink); position: relative; z-index: 1; max-width: 680px; padding-left: 3rem; }
+    .hiw-quote em { font-style: normal; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
+    .hiw-sub { margin-top: 1rem; font-size: .82rem; color: var(--mid); line-height: 1.75; max-width: 560px; position: relative; z-index: 1; padding-left: 3rem; }
+    .hiw-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-bottom: 1px; }
+    .hiw-principle { background: white; border: 1px solid var(--border); padding: 1.5rem; transition: background .2s; }
+    .hiw-principle:hover { background: var(--accent-soft); }
+    .hiw-principle svg { margin-bottom: 1rem; opacity: .75; display: block; }
+    .hiw-pname { font-size: .7rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); margin-bottom: .4rem; }
+    .hiw-pdesc { font-size: .82rem; color: var(--mid); line-height: 1.65; }
+    .hiw-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-bottom: 1px; }
+    .hiw-currently { background: white; border: 1px solid var(--border); padding: 1.5rem; }
+    .hiw-currently-label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem; }
+    .hiw-currently-label::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: hiw-pulse 2s infinite; }
+    @keyframes hiw-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.8); } }
+    .hiw-currently-item { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .85rem; font-size: .83rem; color: var(--mid); line-height: 1.5; }
+    .hiw-currently-item:last-child { margin-bottom: 0; }
+    .hiw-key { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--light); min-width: 72px; padding-top: 2px; flex-shrink: 0; }
+    .hiw-offduty { background: white; border: 1px solid var(--border); padding: 1.5rem; }
+    .hiw-offduty-label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--light); margin-bottom: 1.25rem; }
+    .hiw-tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .hiw-tag { font-size: .75rem; padding: .35rem .8rem; border: 1px solid var(--border); color: var(--mid); border-radius: 999px; transition: border-color .2s, color .2s; }
+    .hiw-tag:hover { border-color: var(--accent); color: var(--accent); }
+    .hiw-tag-highlight { background: var(--accent-soft); border-color: var(--accent); color: #2e5139; }
+    .hiw-tools { border: 1px solid var(--border); padding: 1rem 1.5rem; display: flex; align-items: center; flex-wrap: wrap; background: white; }
+    .hiw-tools-label { font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--light); margin-right: 1.5rem; white-space: nowrap; }
+    .hiw-tool { font-size: .78rem; color: var(--mid); padding: 0 1.1rem; border-right: 1px solid var(--border); }
+    .hiw-tool:last-child { border-right: none; }
+
+    /* PROJECTS */
+    #projects { background: white; }
+    .projects-list { display: flex; flex-direction: column; }
+    .project-row { display: grid; grid-template-columns: 1fr 1.5fr; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; overflow: hidden; }
+    .project-row:first-child { border-top: 1px solid var(--border); }
+    .project-img-wrap { overflow: hidden; aspect-ratio: 16/10; }
+    .project-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, filter .4s; filter: grayscale(20%); }
+    .project-row:hover .project-img-wrap img { transform: scale(1.04); filter: grayscale(0%); }
+    .project-info { padding: 3rem; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--border); }
+    .project-num { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--light); margin-bottom: 1rem; }
+    .project-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; line-height: 1.3; margin-bottom: 1rem; transition: color .2s; }
+    .project-row:hover .project-title { color: var(--accent); }
+    .project-desc { font-size: .9rem; color: var(--mid); line-height: 1.7; margin-bottom: 1.5rem; }
+    .project-tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .project-tag { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .75rem; border: 1px solid var(--border); color: var(--mid); }
+    .project-arrow { margin-top: 1.5rem; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: .4rem; transition: transform .2s; }
+    .project-row:hover .project-arrow { transform: translateX(6px); }
+
+    /* RESUME */
+    #resume { background: var(--bg); }
+    .resume-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .resume-embed-wrap {
+      position: relative;
+      border: 1px solid var(--border);
+      box-shadow: 8px 8px 0 var(--accent-soft);
+      background: white;
+      overflow: hidden;
+    }
+    .resume-embed-wrap iframe {
+      width: 100%;
+      height: 520px;
+      display: block;
+      border: none;
+    }
+    .resume-content h3 { font-family: var(--serif); font-size: 1.75rem; font-weight: 400; font-style: italic; margin-bottom: 1rem; }
+    .resume-content p { color: var(--mid); line-height: 1.8; margin-bottom: 2rem; }
+    .resume-download { display: inline-flex; align-items: center; gap: .75rem; padding: .85rem 2rem; background: var(--ink); color: var(--bg); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: background .2s, transform .2s; }
+    .resume-download:hover { background: var(--accent); transform: translateY(-2px); }
+    .resume-download svg { width: 14px; height: 14px; }
+
+    /* CONTACT */
+    #contact { background: var(--ink); color: var(--bg); }
+    #contact .section-title { color: var(--bg); }
+    #contact .section-num { color: rgba(255,255,255,.3); }
+    #contact .section-header { border-color: rgba(255,255,255,.12); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .contact-info h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; font-style: italic; color: rgba(247,245,240,.7); margin-bottom: 1.25rem; }
+    .contact-info p { color: rgba(247,245,240,.55); line-height: 1.8; margin-bottom: 2rem; }
+    .contact-socials { display: flex; flex-direction: column; gap: .75rem; }
+    .contact-social-link { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: rgba(247,245,240,.7); font-size: .85rem; transition: color .2s, transform .2s; }
+    .contact-social-link:hover { color: var(--bg); transform: translateX(4px); }
+    .social-line { width: 20px; height: 1px; background: currentColor; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-label { display: block; font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(247,245,240,.4); margin-bottom: .5rem; }
+    .form-input, .form-textarea { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: var(--bg); padding: .85rem 1rem; font-family: var(--sans); font-size: .9rem; transition: border-color .2s, background .2s; outline: none; }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(247,245,240,.25); }
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent); background: rgba(255,255,255,.08); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-submit { width: 100%; padding: .9rem; background: var(--accent); color: white; border: none; font-family: var(--sans); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; transition: background .2s, transform .2s; }
+    .form-submit:hover { background: #2e5139; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.08); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-name { font-family: var(--serif); font-size: .9rem; color: rgba(247,245,240,.5); }
+    .footer-note { font-size: .75rem; color: rgba(247,245,240,.3); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      #home { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; }
+      .hero-image-col { order: -1; }
+      .hero-avatar-wrap { width: 260px; height: 260px; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      .about-grid, .resume-layout, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .project-row { grid-template-columns: 1fr; }
+      .project-info { border-left: none; border-top: 1px solid var(--border); padding: 1.75rem; }
+      .hiw-principles { grid-template-columns: 1fr; }
+      .hiw-bottom { grid-template-columns: 1fr; }
+      .hiw-quote { font-size: 1.1rem; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
+</head>
 <body>
-  <!-- ========================= NAVBAR ========================= -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-success-subtle">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.html">Samanta Jimenez Sandate</a>
-    </div>
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
+
+  <nav id="main-nav">
+    <a href="#home" class="nav-name">Samanta Jimenez Sandate</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">How I Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://docs.google.com/document/d/1Hm_ONmTTfkXYq-15ansZrLJVU6pcIB7MnljaQ3-lBNk/edit?usp=sharing" target="_blank" class="resume-btn">Resume &#x2197;</a></li>
+    </ul>
   </nav>
 
-  <!-- ========================= PAGE LAYOUT ========================= -->
-  <div class="page-layout">
-
-   <main class="container my-5">
-
-  <!--Home Page-->
-    <section id="home" class="row align-items-center">
-      <div class="col-md-4 text-center">
-      <img src="https://media.licdn.com/dms/image/v2/D4E03AQFYQ7VXJUKGDA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729103518264?e=2147483647&v=beta&t=oC1WjItkcARJNjtk8szaZfbCYn71K22kJAyQTZKN2bo" 
-           alt="Samanta Jimenez Sandate"
-           class="profile-img">
-       </div>
-      <div class="col-md-8">
-        <h1>Hi, I'm Samanta! </h1>
-        <p>
-          I’m an aspiring UX designer passionate about creating accessible and inclusive experiences. 
-          My work is driven by a commitment to advocating for underrepresented communities, 
-          and I see design as a powerful way to make technology more equitable.
-        </p>
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-text">
+      <p class="hero-tag">UX Designer &middot; Compton, CA</p>
+      <h1 class="hero-title">Designing <em>inclusive</em><br>experiences that matter</h1>
+      <p class="hero-bio">I'm Samanta,a UX designer passionate about accessible, equitable design for underrepresented communities. I turn complex systems into clear, human-centered solutions.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-dark">View My Work</a>
+        <a href="#contact" class="btn-ghost">Get in touch &rarr;</a>
       </div>
-    </section>
-
-    <hr>
-
-<!--Skills Page-->
-
-<section id="skills" class="text-center my-5">
-  <h2>Skills</h2>
-  <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
-    
-    <div class="icon-container">
-      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077183.png" alt="Wireframing" width="40" height="43">
-      <div class="hover-text">Wireframing</div>
     </div>
-
-    <div class="icon-container">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968701.png" alt="Figma" width="40" height="45">
-      <div class="hover-text">Figma</div>
-    </div>
-
-    <div class="icon-container">
-      <img src="https://cdn-icons-png.flaticon.com/512/1352/1352604.png" alt="Prototyping" width="40" height="45">
-      <div class="hover-text">Prototyping</div>
-    </div>
-
-    <div class="icon-container">
-      <img src="https://static.thenounproject.com/png/995627-200.png" alt="User Testing" width="40" height="48">
-      <div class="hover-text">User Testing</div>
-    </div>
-
-    <div class="icon-container">
-      <img src="https://cdn-icons-png.flaticon.com/512/180/180891.png" alt="HTML" width="40" height="45">
-      <div class="hover-text">HTML</div>
-    </div>
-
-    <div class="icon-container">
-      <img src="https://cdn1.iconfinder.com/data/icons/business-programming/512/css-512.png" alt="CSS" width="40" height="45">
-      <div class="hover-text">CSS</div>
-    </div>
-
-    <div class="icon-container">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAc8LPkj2Onpc7GGc9srjtsRNueUQZ1HsdMQ&s" alt="Bootstrap" width="40" height="45">
-      <div class="hover-text">Bootstrap</div>
-    </div>
-
-    <div class="icon-container">
-      <img src="https://static.vecteezy.com/system/resources/previews/026/758/206/non_2x/javascript-development-icon-vector.jpg" alt="JavaScript" width="40" height="45">
-      <div class="hover-text">JavaScript</div>
-    </div>
-
-  </div>
-</section>
-
-    <hr>
-
-<!--Resume Page-->
-    <section id="resume" class="text-center my-5">
-      <h2>Resume</h2>
-        <img src="https://i.ibb.co/whYkPqvd/portfolio-resume.png" 
-            alt="Preview of Samanta's resume" 
-            class="img-fluid my-3 border rounded">
-      <div>
-        <a href="https://docs.google.com/document/d/1Hm_ONmTTfkXYq-15ansZrLJVU6pcIB7MnljaQ3-lBNk/edit?usp=sharing"
-          target="_blank"
-          class="btn btn-success mt-2">View Full Resume (Google Docs)</a>
+    <div class="hero-image-col">
+      <div class="hero-avatar-wrap">
+        <img src="avatar_chibi.png" alt="Samanta Jimenez Sandate">
       </div>
-    </section>
-<hr>
+    </div>
+  </section>
 
-<!--Projects Page-->
-<section id="projects" class="my-5">
-  <h2 class="text-center">Projects</h2>
-  <div class="row text-center mt-4">
-    
-    <div class="col-md-4 mb-3">
-      <a href="project1.html" class="text-decoration-none text-dark">
-        <div class="card h-100 project-card">
-          <img src="https://static.wixstatic.com/media/8c5697_72417c344932466fa2e96bf26ddad16e~mv2.png/v1/fit/w_2500,h_1330,al_c/8c5697_72417c344932466fa2e96bf26ddad16e~mv2.png" class="card-img-top" alt="Website Redesign for Accessibility and Engagement">
-          <div class="card-body">
-            <h3 class="card-title">Website Redesign for Accessibility and Engagement</h3>
-            <p class="card-text">Collaborated with a cross-functional team of five designers to redesign a nonprofit’s educational website, improving accessibility and engagement.</p>
-          </div>
-        </div>
-      </a>
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>UX Research</span><span class="dot">&middot;</span>
+      <span>Interaction Design</span><span class="dot">&middot;</span>
+      <span>Figma</span><span class="dot">&middot;</span>
+      <span>Prototyping</span><span class="dot">&middot;</span>
+      <span>Usability Testing</span><span class="dot">&middot;</span>
+      <span>Accessibility</span><span class="dot">&middot;</span>
+      <span>Wireframing</span><span class="dot">&middot;</span>
+      <span>User Journeys</span><span class="dot">&middot;</span>
+      <span>HTML &middot; CSS &middot; JavaScript</span><span class="dot">&middot;</span>
+      <span>UX Research</span><span class="dot">&middot;</span>
+      <span>Interaction Design</span><span class="dot">&middot;</span>
+      <span>Figma</span><span class="dot">&middot;</span>
+      <span>Prototyping</span><span class="dot">&middot;</span>
+      <span>Usability Testing</span><span class="dot">&middot;</span>
+      <span>Accessibility</span><span class="dot">&middot;</span>
+      <span>Wireframing</span><span class="dot">&middot;</span>
+      <span>User Journeys</span><span class="dot">&middot;</span>
+      <span>HTML &middot; CSS &middot; JavaScript</span><span class="dot">&middot;</span>
     </div>
-    
-    <div class="col-md-4 mb-3">
-      <a href="project2.html" class="text-decoration-none text-dark">
-        <div class="card h-100 project-card">
-          <img src="https://i.ibb.co/fzXKvQHH/project2.png" class="card-img-top" alt="Streamlining Course Enrollment for Students">
-          <div class="card-body">
-            <h3 class="card-title">Improving Health Insurance Literacy for UCI Students</h3>
-            <p class="card-text">Designed a website to improve students’ understanding of medical insurance, featuring a glossary and chatbot for easy access.</p>
-          </div>
-        </div>
-      </a>
-    </div>
-    
-    <div class="col-md-4 mb-3">
-      <a href="project3.html" class="text-decoration-none text-dark">
-        <div class="card h-100 project-card">
-          <img src="https://i.ibb.co/zhddb56h/Screenshot-2026-01-05-152606.png" class="card-img-top" alt="Encouraging Local Exploration One ROAM At a Time">
-          <div class="card-body">
-            <h3 class="card-title">Encouraging Local Exploration One ROAM At a Time</h3>
-            <p class="card-text"> A scavenger-hunt–style mobile app designed to help users break routine,
-        explore their communities, and support local businesses.</p>
-          </div>
-        </div>
-      </a>
-    </div>
-
   </div>
-</section>
 
-    <hr>
-
-<!--Contact Page-->
-
-<section id="contact" class="text-center my-5">
-  <h2><span>☆</span> Contact Me <span>☆</span></h2>
-
-  <form action="https://formspree.io/f/mgolklaj"
-        method="POST"
-        class="mx-auto"
-        style="max-width: 500px;"
-        aria-label="Contact form">
-
-    <!-- hidden fields — no visual effect -->
-    <input type="hidden" name="_subject" value="Portfolio Contact Message">
-    <input type="text" name="_gotcha" style="display:none">
-
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text"
-             class="form-control"
-             id="name"
-             name="name"
-             placeholder="Enter your name"
-             required>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-portrait reveal">
+          <img src="samanta_photo.jpg" alt="Samanta Jimenez Sandate">
+        </div>
+        <div class="about-content">
+          <h3 class="reveal">&ldquo;Design as a tool for equity.&rdquo;</h3>
+          <p class="reveal reveal-delay-1">I'm an aspiring UX designer passionate about creating accessible and inclusive experiences. My work is driven by a commitment to advocating for underrepresented communities, and I see design as a powerful way to make technology more equitable.</p>
+          <p class="reveal reveal-delay-2">Through research-driven design, I transform complex, unstructured systems into clear, human-centered solutions, always asking: who is this designed for, and who might be left out?</p>
+          <div class="about-details reveal reveal-delay-3">
+            <div class="about-detail-item"><span>Focus</span><strong>UX / Interaction Design</strong></div>
+            <div class="about-detail-item"><span>Based in</span><strong>Compton, California</strong></div>
+            <div class="about-detail-item"><span>Experience</span><strong>Nonprofit &amp; Academic</strong></div>
+            <div class="about-detail-item"><span>Values</span><strong>Equity &middot; Clarity &middot; Access</strong></div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email"
-             class="form-control"
-             id="email"
-             name="email"
-             placeholder="Enter your email"
-             required>
+  <!-- HOW I WORK -->
+  <section id="skills">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">How I work</h2>
+      </div>
+      <div class="hiw-philosophy reveal">
+        <p class="hiw-quote">Design is how I <em>advocate for my community</em>, the undocumented, low-income, Spanish-speaking families whose struggles are written out of most design processes before they even begin.</p>
+        <p class="hiw-sub">I make things for people who don't usually see themselves in tech. That means doing the extra research, asking the uncomfortable questions, and refusing to let &ldquo;general audience&rdquo; be an excuse for exclusion.</p>
+      </div>
+      <div class="hiw-principles reveal">
+        <div class="hiw-principle">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--accent)" stroke-width="1.5"><circle cx="14" cy="14" r="11"/><path d="M9 14h10M14 9v10"/></svg>
+          <div class="hiw-pname">Accessibility first</div>
+          <div class="hiw-pdesc">If it's not accessible, it's not finished. I design with people who are typically deprioritised at the centre, not bolted on at the end.</div>
+        </div>
+        <div class="hiw-principle">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M4 20L14 6l10 14"/><path d="M9 20l5-7 5 7"/></svg>
+          <div class="hiw-pname">Research over assumptions</div>
+          <div class="hiw-pdesc">I never design for a community without first listening to them. Assumptions are where equity dies. Interviews, surveys, and lived experience come first.</div>
+        </div>
+        <div class="hiw-principle">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="4" y="8" width="20" height="14" rx="2"/><path d="M9 6V4M19 6V4M4 13h20"/></svg>
+          <div class="hiw-pname">Clarity is kindness</div>
+          <div class="hiw-pdesc">Complex language is a barrier. I design for comprehension, plain words, clear hierarchy, and interfaces that don't demand prior knowledge to navigate.</div>
+        </div>
+      </div>
+      <div class="hiw-bottom reveal">
+        <div class="hiw-currently">
+          <div class="hiw-currently-label">Currently</div>
+          <div class="hiw-currently-item"><span class="hiw-key">Watching</span><span>Jujutsu Kaisen &mdash; finally caught up on the Shibuya arc</span></div>
+          <div class="hiw-currently-item"><span class="hiw-key">Playing</span><span>Valorant, Hollow Knight, Minecraft</span></div>
+          <div class="hiw-currently-item"><span class="hiw-key">Cooking</span><span>Working through dishes from different countries &mdash; currently Thai (yum!)</span></div>
+          <div class="hiw-currently-item"><span class="hiw-key">Seeking</span><span>UX internships where equity isn't just a buzzword</span></div>
+        </div>
+        <div class="hiw-offduty">
+          <div class="hiw-offduty-label">Off the clock</div>
+          <div class="hiw-tags">
+            <span class="hiw-tag hiw-tag-highlight">JJK</span>
+            <span class="hiw-tag">Saiki K</span>
+            <span class="hiw-tag">Love is War</span>
+            <span class="hiw-tag hiw-tag-highlight">Valorant</span>
+            <span class="hiw-tag">League of Legends</span>
+            <span class="hiw-tag">Overwatch</span>
+            <span class="hiw-tag hiw-tag-highlight">Hollow Knight</span>
+            <span class="hiw-tag">Minecraft</span>
+            <span class="hiw-tag">Baking</span>
+            <span class="hiw-tag">International recipes</span>
+            <span class="hiw-tag">Illustration</span>
+          </div>
+        </div>
+      </div>
+      <div class="hiw-tools reveal">
+        <span class="hiw-tools-label">Tools</span>
+        <span class="hiw-tool">Figma</span>
+        <span class="hiw-tool">Wireframing</span>
+        <span class="hiw-tool">Prototyping</span>
+        <span class="hiw-tool">User Testing</span>
+        <span class="hiw-tool">HTML</span>
+        <span class="hiw-tool">CSS</span>
+        <span class="hiw-tool">JavaScript</span>
+        <span class="hiw-tool">Bootstrap</span>
+      </div>
     </div>
+  </section>
 
-    <div class="mb-3">
-      <label for="message" class="form-label">Message</label>
-      <textarea class="form-control"
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Write your message here"
-                required></textarea>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Projects</h2>
+      </div>
+      <div class="projects-list">
+        <a href="project3.html" class="project-row reveal">
+          <div class="project-img-wrap"><img src="https://i.ibb.co/zhddb56h/Screenshot-2026-01-05-152606.png" alt="ROAM App"></div>
+          <div class="project-info">
+            <div class="project-num">Project 01</div>
+            <h3 class="project-title">Encouraging Local Exploration One ROAM At a Time</h3>
+            <p class="project-desc">A scavenger-hunt&ndash;style mobile app designed to help users break routine, explore their communities, and support local businesses through gamified discovery.</p>
+            <div class="project-tags"><span class="project-tag">Interaction Design</span><span class="project-tag">Mobile</span><span class="project-tag">Gamification</span><span class="project-tag">8 Weeks</span></div>
+            <div class="project-arrow">View case study &rarr;</div>
+          </div>
+        </a>
+        <a href="project1.html" class="project-row reveal reveal-delay-1">
+          <div class="project-img-wrap"><img src="crsci-macbook-hero.png" alt="CRSci Redesign"></div>
+          <div class="project-info">
+            <div class="project-num">Project 02</div>
+            <h3 class="project-title">Website Redesign for Accessibility and Engagement</h3>
+            <p class="project-desc">Collaborated with a cross-functional team of five designers to redesign a nonprofit's educational website, improving accessibility and engagement for underrepresented communities.</p>
+            <div class="project-tags"><span class="project-tag">UX Design</span><span class="project-tag">Nonprofit</span><span class="project-tag">Accessibility</span><span class="project-tag">13 Weeks</span></div>
+            <div class="project-arrow">View case study &rarr;</div>
+          </div>
+        </a>
+        <a href="project2.html" class="project-row reveal reveal-delay-2">
+          <div class="project-img-wrap"><img src="hh-macbook-hero.png" alt="Health Insurance Literacy"></div>
+          <div class="project-info">
+            <div class="project-num">Project 03</div>
+            <h3 class="project-title">Improving Health Insurance Literacy for UCI Students</h3>
+            <p class="project-desc">Designed a student-centered platform to improve understanding of medical insurance, featuring a glossary and chatbot for easy, anxiety-free access to complex information.</p>
+            <div class="project-tags"><span class="project-tag">UX Research</span><span class="project-tag">Product Design</span><span class="project-tag">10 Weeks</span></div>
+            <div class="project-arrow">View case study &rarr;</div>
+          </div>
+        </a>
+      </div>
     </div>
+  </section>
 
-    <button type="submit" class="btn btn-success">Send Message</button>
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Resume</h2>
+      </div>
+      <div class="resume-layout">
+        <div class="resume-embed-wrap reveal">
+          <iframe
+            src="https://drive.google.com/file/d/1-kpN5rPWDDqC7etwYibTYNah39SXuRi5/preview"
+            title="Samanta Jimenez Sandate Resume"
+            allow="autoplay">
+          </iframe>
+        </div>
+        <div class="resume-content">
+          <h3 class="reveal">Want to work together?</h3>
+          <p class="reveal reveal-delay-1">I'm actively seeking UX design opportunities where I can contribute to meaningful, accessible products. My background spans nonprofit, academic, and mobile product contexts &mdash; always grounded in research and user empathy.</p>
+          <a href="https://drive.google.com/file/d/1-kpN5rPWDDqC7etwYibTYNah39SXuRi5/view?usp=drive_link" target="_blank" class="resume-download reveal reveal-delay-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Open Full Resume
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </form>
-</section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">05</span>
+        <h2 class="section-title">Get in Touch</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3 class="reveal">Let's create something meaningful.</h3>
+          <p class="reveal reveal-delay-1">Whether you have a project in mind, want to collaborate, or just want to say hello &mdash; my inbox is always open.</p>
+          <div class="contact-socials reveal reveal-delay-2">
+            <a href="https://www.linkedin.com/in/samanta-jimenez-sandate-526369333" target="_blank" class="contact-social-link"><span class="social-line"></span>LinkedIn</a>
+          </div>
+        </div>
+        <form class="contact-form reveal reveal-delay-1" action="https://formspree.io/f/mgolklaj" method="POST">
+          <input type="hidden" name="_subject" value="Portfolio Contact Message">
+          <input type="hidden" name="_replyto" value="samanthaj1334@gmail.com">
+          <input type="text" name="_gotcha" style="display:none">
+          <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input type="text" class="form-input" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" class="form-input" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="What's on your mind?" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-  </main>
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Samanta Jimenez Sandate</span>
+    <span class="footer-note">Designed &amp; built with care &middot; 2025</span>
+  </footer>
 
-  <footer class="text-center py-4 bg-success-subtle">
-
-<!--Footer-->
-<div class="footer-social">
-
-  <a href="https://www.linkedin.com/in/samanta-jimenez-sandate-526369333"
-     target="_blank"
-     rel="noopener"
-     class="linkedin-link">
-
-    <img src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Icon-Black-Logo.wine.svg"
-         alt="Samanta's LinkedIn"
-         width="40"
-         height="40">
-
-    <span class="linkedin-text">
-      <em>Connect with me on LinkedIn! </em>
-    </span>
-
-  </a>
-
-</div>
-
-<!-- Modal structure -->
-<div id="imgModal" onclick="closeModal()">
-  <span>&times;</span>
-  <img id="modalContent">
-</div>
-
-<script>
-function openModal(img) {
-  document.getElementById("imgModal").style.display = "block";
-  document.getElementById("modalContent").src = img.src;
-}
-
-function closeModal() {
-  document.getElementById("imgModal").style.display = "none";
-}
-</script>
-
-
-  </body>
+  <script>
+    const cur = document.getElementById('cur');
+    const ring = document.getElementById('cur-ring');
+    let mx = -100, my = -100, rx = -100, ry = -100;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    document.addEventListener('mouseover', e => {
+      document.body.classList.toggle('hovering', !!e.target.closest('a, button'));
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+    window.addEventListener('scroll', () => {
+      const darkEls = document.querySelectorAll('#contact, footer');
+      const anyDark = [...darkEls].some(el => {
+        const r = el.getBoundingClientRect();
+        return r.top < window.innerHeight * 0.6 && r.bottom > 0;
+      });
+      document.body.classList.toggle('dark-bg', anyDark);
+      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
 </html>
